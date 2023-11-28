@@ -30,10 +30,10 @@ public class MoviesController {
     }
 
     @GetMapping(path = "/{movieId}")
-    public Movie getMovieById(
+    public Movie getMovieDetailsById(
             @PathVariable("movieId") Integer movieId
     ) {
-        return moviesService.getMovieById(movieId);
+        return moviesService.getMovieDetailsById(movieId);
     }
     // MOVIE FUNCTIONS - END
 }

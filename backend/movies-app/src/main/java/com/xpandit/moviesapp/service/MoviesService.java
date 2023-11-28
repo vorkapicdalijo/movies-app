@@ -28,8 +28,8 @@ public class MoviesService implements IMoviesService {
     }
 
     @Override
-    public Movie getMovieById(Integer movieId) {
-        return this.moviesDAO.getMovieById(movieId);
+    public Movie getMovieDetailsById(Integer movieId) {
+        return this.moviesDAO.getMovieDetailsById(movieId);
     }
 
     // MOVIE FUNCTIONS - END

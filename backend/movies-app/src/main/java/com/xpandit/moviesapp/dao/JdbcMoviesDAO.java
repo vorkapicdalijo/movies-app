@@ -21,7 +21,7 @@ public class JdbcMoviesDAO implements IMoviesDAO {
     }
 
     @Override
-    public Movie getMovieById(Integer movieId) {
+    public Movie getMovieDetailsById(Integer movieId) {
         return null;
     }
 

@@ -8,5 +8,5 @@ public interface IMoviesDAO {
 
     List<Movie> getMovies();
 
-    Movie getMovieById(Integer movieId);
+    Movie getMovieDetailsById(Integer movieId);
 }
