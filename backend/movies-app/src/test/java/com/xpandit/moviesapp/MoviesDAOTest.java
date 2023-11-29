@@ -21,4 +21,11 @@ public class MoviesDAOTest {
 
         Assert.isTrue(movies.size() > 0, "Test passed!");
     }
+
+    @Test
+    public void testGetMovieDetailsById() {
+        final Movie movie = moviesDAO.getMovieDetailsById(1);
+
+        Assert.isTrue(movie.getId() != null, "Test passed!");
+    }
 }
