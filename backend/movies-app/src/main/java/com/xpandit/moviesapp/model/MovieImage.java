@@ -15,6 +15,8 @@ public class MovieImage {
 
     private String fileName;
 
+    private byte[] fileContent;
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +63,13 @@ public class MovieImage {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public byte[] getFileContent() {
+        return fileContent;
+    }
+
+    public void setFileContent(byte[] fileContent) {
+        this.fileContent = fileContent;
     }
 }

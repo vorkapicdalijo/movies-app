@@ -2,6 +2,7 @@ package com.xpandit.moviesapp.model;
 
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
 public class Movie {
     private Integer id;
@@ -14,13 +15,17 @@ public class Movie {
 
     private String description;
 
-    private Time duration;
+    private Date duration;
 
     private Date releaseDate;
 
     private Float revenue;
 
     private Date createDate;
+
+    private MovieImage titleImage;
+
+    private List<MovieImage> detailImages;
 
     public Integer getId() {
         return id;
@@ -62,11 +67,11 @@ public class Movie {
         this.description = description;
     }
 
-    public Time getDuration() {
+    public Date getDuration() {
         return duration;
     }
 
-    public void setDuration(Time duration) {
+    public void setDuration(Date duration) {
         this.duration = duration;
     }
 
@@ -92,5 +97,21 @@ public class Movie {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public MovieImage getTitleImage() {
+        return titleImage;
+    }
+
+    public void setTitleImage(MovieImage titleImage) {
+        this.titleImage = titleImage;
+    }
+
+    public List<MovieImage> getDetailImages() {
+        return detailImages;
+    }
+
+    public void setDetailImages(List<MovieImage> detailImages) {
+        this.detailImages = detailImages;
     }
 }

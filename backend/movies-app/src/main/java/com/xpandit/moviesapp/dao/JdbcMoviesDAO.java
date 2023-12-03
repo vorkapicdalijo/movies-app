@@ -2,6 +2,7 @@ package com.xpandit.moviesapp.dao;
 
 import com.xpandit.moviesapp.interfaces.IMoviesDAO;
 import com.xpandit.moviesapp.model.Movie;
+import com.xpandit.moviesapp.model.MovieImage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +37,26 @@ public class JdbcMoviesDAO implements IMoviesDAO {
                     .append("     m.release_date, ")
                     .append("     m.revenue, ")
                     .append("     mt.type_id, ")
-                    .append("     mt.type_name ")
+                    .append("     mt.type_name, ")
+                    .append("     mi.id as image_id, ")
+                    .append("     mi.file_name, ")
+                    .append("     mi.fs_path, ")
+                    .append("     it.type_id as image_type_id, ")
+                    .append("     it.type_name as image_type_name ")
                     .append(" FROM ")
                     .append("     movies m ")
                     .append(" LEFT JOIN ")
                     .append("     movie_types mt ")
                     .append(" ON ")
-                    .append("     m.movie_type_id = mt.type_id ");
+                    .append("     m.movie_type_id = mt.type_id ")
+                    .append(" LEFT JOIN ")
+                    .append("     movie_images mi ")
+                    .append(" ON ")
+                    .append("     m.id = mi.movie_id ")
+                    .append(" LEFT JOIN ")
+                    .append("     image_types it ")
+                    .append(" ON ")
+                    .append("     mi.image_type_id = it.type_id ");
 
             List<Movie> movies = jdbcTemplate.query(queryBuilder.toString(), (resultSet, i) -> {
                 Movie movie = new Movie();
@@ -55,6 +69,15 @@ public class JdbcMoviesDAO implements IMoviesDAO {
                 movie.setReleaseDate(resultSet.getDate("release_date"));
                 movie.setDuration(resultSet.getTime("duration"));
                 movie.setRevenue(Float.parseFloat(resultSet.getString("revenue")));
+
+                MovieImage titleImage = new MovieImage();
+
+                titleImage.setId(Integer.parseInt(resultSet.getString("image_id")));
+                titleImage.setImageTypeId(Integer.parseInt(resultSet.getString("image_type_id")));
+                titleImage.setFileName(resultSet.getString("file_name"));
+                titleImage.setFsPath(resultSet.getString("fs_path"));
+
+                movie.setTitleImage(titleImage);
 
                 return movie;
             });
