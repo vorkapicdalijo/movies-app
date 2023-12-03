@@ -1,0 +1,43 @@
+.cover-image {
+  width: 110px;
+}
+
+@media (max-width: 576px) {
+  .cover-image {
+    width: 170px;
+  }
+}
+
+.movie-container {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.01);
+}
+
+
+
+.movie-container:hover {
+  cursor: pointer;
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.pill-container {
+  display: inline-block;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.revenue-container {
+  background-color: #d6f5d6;
+}
+
+.type-container {
+  background-color: #ffcccc;
+}
+
+i {
+  font-size: 24px;
+}
+
+span {
+  font-size: 16px;
+}
