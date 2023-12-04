@@ -6,6 +6,6 @@ import * as moment from 'moment';
 })
 export class DurationPipe implements PipeTransform {
   transform(value: any, args?: any): any {
-    return moment(value,'HH:mm').format("HH:mm");
+    return moment(value,'HH:mm').format("HH:mm").toString().split(":")[0] + 'h ' + moment(value,'HH:mm').format("HH:mm").toString().split(":")[1] + 'min'
   }
 }

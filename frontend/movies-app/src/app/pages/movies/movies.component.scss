@@ -8,6 +8,28 @@
   }
 }
 
+.title-container {
+  span {
+    color: #595959;
+    font-style: italic;
+  };
+
+  .title-start {
+    width: 10px;
+    background-color: #00ff80;
+  };
+
+  .divider {
+    width: 40%;
+  };
+
+  @media (max-width: 576px) {
+    .divider {
+      width: 100%
+    }
+  }
+}
+
 .movie-container {
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.01);
