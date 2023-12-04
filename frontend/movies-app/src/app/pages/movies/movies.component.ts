@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { MatDialog } from '@angular/material/dialog';
+import { MovieDetailsDialogComponent } from 'src/app/components/dialogs/movie-details-dialog/movie-details-dialog.component';
 import { Movie } from 'src/app/models/movie.model';
 import { MoviesService } from 'src/app/services/movies.service';
 
@@ -17,12 +18,26 @@ export class MoviesComponent implements OnInit {
 
   constructor(
     private moviesService: MoviesService,
-    private sanitizer: DomSanitizer,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
     this.loadMovies();
 
+  }
+
+  public openMovieDetailsDialog(movieId: number) {
+    const dialogRef = this.dialog.open(MovieDetailsDialogComponent,
+      {
+        data: {
+          movieId: movieId
+        }
+      });
+
+    dialogRef.afterClosed()
+      .subscribe(res => {
+
+      });
   }
 
   private loadMovies() {
@@ -32,21 +47,11 @@ export class MoviesComponent implements OnInit {
       next: (res: Movie[]) => {
         this.movies = res;
         this.isLoading = false;
-        this.handleImage();
       },
       error: (err) => {
         console.log(err);
         this.isLoading = false;
       }
-  });
+    });
   }
-
-  handleImage() {
-    this.imageData = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${this.movies[0].titleImage.fileContent}`);
-  }
-
-  sanitize( url:string ) {
-    return this.sanitizer.bypassSecurityTrustUrl(url);
-  }
-
 }

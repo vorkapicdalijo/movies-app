@@ -1,35 +1,41 @@
 <div class="container mt-5">
   <h1 class="text-center mb-5">Movies list</h1>
 
-  <div>
-    <div class="movie-container bg-light container d-flex flex-row"
+  <div class="my-5">
+    <div class="movie-container container my-2"
         *ngFor="let movie of movies"
-        matRipple>
-      <img  class="cover-image my-2"
-            [src]="imageData" alt="Cover">
-      <div class="my-3 ms-4">
-        <h4>{{movie.title}}</h4>
-        <div class="mb-3">
-          <div class="pill-container type-container px-3 py-1 rounded-pill d-inline-flex align-items-center me-2 my-1">
-            <i class="las la-theater-masks me-2"></i>
-            <span>{{movie.movieTypeName}}</span>
+        matRipple
+        (click)="openMovieDetailsDialog(movie.id)">
+      <div class="d-flex flex-row">
+        <img  class="cover-image my-2"
+              [src]="movie.titleImage.imagePath" alt="Cover">
+        <div class="my-3 ms-4">
+          <h4 class="mb-4">{{movie.title}}</h4>
+          <div class="mb-3">
+            <div class="pill-container type-container px-3 py-1 rounded-pill d-inline-flex align-items-center me-2 my-1">
+              <i class="las la-theater-masks me-2"></i>
+              <span>{{movie.movieTypeName}}</span>
+            </div>
+            <div class="pill-container px-3 py-1 rounded-pill bg-warning d-inline-flex align-items-center me-2 my-1">
+              <i class="las la-clock me-2"></i>
+              <span>{{movie.duration | durationPipe}}</span>
+            </div>
+            <div class="pill-container px-3 py-1 rounded-pill bg-info d-inline-flex align-items-center me-2 my-1">
+              <i class="las la-calendar-day me-2"></i>
+              <span>{{movie.releaseDate | date: 'MM/yyyy'}}</span>
+            </div>
+            <div class="pill-container revenue-container px-3 py-1 rounded-pill d-inline-flex align-items-center my-1">
+              <i class="las la-hand-holding-usd me-2"></i>
+              <span>{{movie.revenue | number}} $</span>
+            </div>
           </div>
-          <div class="pill-container px-3 py-1 rounded-pill bg-warning d-inline-flex align-items-center me-2 my-1">
-            <i class="las la-clock me-2"></i>
-            <span>{{movie.duration | durationPipe}}</span>
-          </div>
-          <div class="pill-container px-3 py-1 rounded-pill bg-info d-inline-flex align-items-center me-2 my-1">
-            <i class="las la-calendar-day me-2"></i>
-            <span>{{movie.releaseDate | date: 'MM/yyyy'}}</span>
-          </div>
-          <div class="pill-container revenue-container px-3 py-1 rounded-pill d-inline-flex align-items-center my-1">
-            <i class="las la-hand-holding-usd me-2"></i>
-            <span>{{movie.revenue | number}} $</span>
+          <div class="d-none d-sm-block">
+            <p>{{movie.description}}</p>
           </div>
         </div>
-        <div>
-          <p>{{movie.description}}</p>
-        </div>
+      </div>
+      <div class="d-sm-none mt-2">
+        <p>{{movie.description}}</p>
       </div>
     </div>
   </div>
