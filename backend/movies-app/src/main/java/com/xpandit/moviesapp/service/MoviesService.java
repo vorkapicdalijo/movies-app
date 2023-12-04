@@ -33,22 +33,15 @@ public class MoviesService implements IMoviesService {
 
         List<Movie> movies = this.moviesDAO.getMovies();
 
-        movies.forEach(movie -> {
-            try {
-                byte[] fileContent = Files.readAllBytes(Paths.get(movie.getTitleImage().getFsPath()));
-
-                movie.getTitleImage().setFileContent(fileContent);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-
         return movies;
     }
 
     @Override
     public Movie getMovieDetailsById(Integer movieId) {
-        return this.moviesDAO.getMovieDetailsById(movieId);
+
+        Movie movie =  this.moviesDAO.getMovieDetailsById(movieId);
+
+        return movie;
     }
 
     // MOVIE FUNCTIONS - END

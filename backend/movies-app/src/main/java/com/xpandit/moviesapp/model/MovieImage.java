@@ -11,11 +11,10 @@ public class MovieImage {
 
     private Date createDate;
 
-    private String fsPath;
+    private String imagePath;
 
-    private String fileName;
+    private String imageName;
 
-    private byte[] fileContent;
 
     public Integer getId() {
         return id;
@@ -49,27 +48,19 @@ public class MovieImage {
         this.createDate = createDate;
     }
 
-    public String getFsPath() {
-        return fsPath;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setFsPath(String fsPath) {
-        this.fsPath = fsPath;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public byte[] getFileContent() {
-        return fileContent;
-    }
-
-    public void setFileContent(byte[] fileContent) {
-        this.fileContent = fileContent;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 }
