@@ -3,7 +3,6 @@ export interface MovieImage {
   imageTypeId: number;
   moveId?: number;
   createDate?: Date;
-  fsPath: String;
-  fileName: String;
-  fileContent: any[];
+  imagePath: string;
+  imageName: string;
 }

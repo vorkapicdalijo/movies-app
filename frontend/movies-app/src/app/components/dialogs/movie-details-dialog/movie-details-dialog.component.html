@@ -1,0 +1,24 @@
+<ng-container *ngIf="!isLoading">
+  <h2>{{movie.title}}</h2>
+  <div mat-dialog-content>
+    <div class="d-flex flex-column flex-md-row">
+      <div class="d-flex align-items-center">
+        <img  class="cover-image my-2 mx-auto"
+                  [src]="movie.titleImage.imagePath" alt="Cover">
+      </div>
+      <div class="ms-0 ms-md-4 mt-3">
+        <h5>Description</h5>
+        <p>
+          In the heart of the bustling city, where the rhythm of life pulsates through the crowded streets,
+          a solitary street musician stood beneath the glow of flickering neon lights.
+          With nimble fingers dancing across the strings of a weathered guitar,
+          the melodies he conjured seemed to weave through the urban chaos like a soothing balm. Passersby,
+          lost in the cacophony of their own thoughts, paused for a moment to absorb the transient magic.
+          The music became a transient bridge, connecting disparate lives in a harmonious interlude.
+          And as the night unfolded, the cityscape embraced this ephemeral serenade, echoing the symphony of the human experience.
+        </p>
+      </div>
+    </div>
+    <hr class="mx-5 my-3" />
+  </div>
+</ng-container>

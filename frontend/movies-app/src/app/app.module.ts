@@ -13,13 +13,17 @@ import { MoviesService } from './services/movies.service';
 import { HeaderComponent } from './components/header/header.component';
 import { MatRippleModule } from '@angular/material/core';
 import { DurationPipe } from './components/pipes/time-duration.pipe';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MovieDetailsDialogComponent } from './components/dialogs/movie-details-dialog/movie-details-dialog.component';
+import { LightboxModule } from 'ngx-lightbox';
 
 @NgModule({
   declarations: [
     AppComponent,
     MoviesComponent,
     HeaderComponent,
-    DurationPipe
+    DurationPipe,
+    MovieDetailsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +34,9 @@ import { DurationPipe } from './components/pipes/time-duration.pipe';
     ReactiveFormsModule,
     MatInputModule,
     MatToolbarModule,
-    MatRippleModule
+    MatRippleModule,
+    MatDialogModule,
+    LightboxModule
   ],
   providers: [MoviesService],
   bootstrap: [AppComponent]

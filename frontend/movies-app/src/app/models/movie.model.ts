@@ -12,4 +12,5 @@ export interface Movie {
   createDate: Date;
 
   titleImage: MovieImage;
+  detailImages: MovieImage[];
 }

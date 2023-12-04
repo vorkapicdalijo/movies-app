@@ -1,0 +1,9 @@
+.cover-image {
+  width: 200px;
+}
+
+@media (max-width: 576px) {
+  .cover-image {
+    width: 170px;
+  }
+}
