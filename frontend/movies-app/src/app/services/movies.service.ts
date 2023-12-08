@@ -14,7 +14,7 @@ export class MoviesService implements OnDestroy {
 
   public moviesLoad$: Subject<MoviePagination> = new Subject<MoviePagination>();
 
-  private serviceSubscriptions!: Subscription[];
+  private serviceSubscriptions: Subscription[] = [];
 
   constructor(
     private http: HttpClient

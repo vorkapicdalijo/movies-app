@@ -13,13 +13,13 @@ public class MoviePagination {
     //Filters
     private boolean getTop10MoviesByRevenue;
     private boolean getTop10MoviesByRevenueByYear;
-    private Date filterYear;
+    private Number filterYear;
 
-    public Date getFilterYear() {
+    public Number getFilterYear() {
         return filterYear;
     }
 
-    public void setFilterYear(Date filterYear) {
+    public void setFilterYear(Number filterYear) {
         this.filterYear = filterYear;
     }
 

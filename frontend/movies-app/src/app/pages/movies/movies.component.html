@@ -1,13 +1,54 @@
 <div class="main-container container mt-5">
-  <div class="mb-5 title-container">
+  <div class="mb-3 title-container">
     <div class="d-flex flex-row mb-3">
       <div class="title-start me-2"></div>
       <h1 class="text-start mb-0">Movies list</h1>
     </div>
-    <span>A Cinematic Journey Through Time and Genre.</span>
-    <hr class="divider me-5 mt-4" />
+    <span class="subtitle">A Cinematic Journey Through Time and Genre.</span>
+    <hr class="divider me-5 mt-4 mb-5" />
+    <h5>Filter by</h5>
+    <div class="d-flex flex-column flex-sm-row">
+      <button class="btn btn-primary rounded-pill d-inline-flex justify-content-center align-items-center mb-2 mb-sm-0"
+              (click)="getMoviesByRevenue()">
+        <i class="las la-funnel-dollar me-2"></i>
+        <span>Top 10 Movies by Revenue</span>
+      </button>
+      <button class="btn btn-secondary rounded-pill d-inline-flex justify-content-center align-items-center ms-0 ms-sm-2 mb-2 mb-sm-0"
+              (click)="showYearForm()">
+        <i class="las la-business-time me-2"></i>
+        <span>Top 10 Movies by Revenue by Year</span>
+      </button>
+      <button class="btn btn-warning rounded-pill ms-0 ms-sm-2"
+              *ngIf="isFilterView"
+              (click)="removeFilters()">
+        X
+      </button>
+    </div>
+    <div class="d-flex justify-content-center justify-content-sm-start">
+      <div class="d-inline-flex flex-column justify-content-center align-items-center form-container px-5 pt-4 mt-2"
+          *ngIf="showYearInput">
+        <form [formGroup]="filterForm" >
+          <app-year-picker
+                    [formControl]="filterForm.get('yearPicker')"
+                    [jpCustomFormFieldClass]="jpCustomFormFieldClass"
+                    [max]="max"
+                    [min]="min">
+          </app-year-picker>
+        </form>
+        <div class="d-inline-flex flex-row justify-content-center mb-2" *ngIf="checkFormDirty()">
+          <button class="btn btn-info me-2"
+                  (click)="getMoviesByYearRevenue()">
+            Submit
+          </button>
+          <button class="btn btn-light"
+                  (click)="clearForm()">
+            X
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="my-5">
+  <div class="mb-4 mt-1" infiniteScroll [infiniteScrollDistance]="0.5" (scrolled)="onScroll($event)" *ngIf="!isLoading && movies.length > 0; else alternative">
     <div class="movie-container container my-2"
         *ngFor="let movie of movies"
         matRipple
@@ -45,4 +86,13 @@
       </div>
     </div>
   </div>
+
+  <ng-template #alternative>
+    <div class="d-flex justify-content-center p-5 mt-5" *ngIf="isLoading">
+      <img src="../../../assets/spinner.svg" alt="loading spinner">
+    </div>
+    <div class="d-flex justify-content-center p-5 mt-5" *ngIf="movies.length == 0">
+      <h1 class="text-center">No Movies found.</h1>
+    </div>
+  </ng-template>
 </div>

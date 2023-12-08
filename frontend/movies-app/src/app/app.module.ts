@@ -11,11 +11,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MoviesService } from './services/movies.service';
 import { HeaderComponent } from './components/header/header.component';
-import { MatRippleModule } from '@angular/material/core';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { DurationPipe } from './components/pipes/time-duration.pipe';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MovieDetailsDialogComponent } from './components/dialogs/movie-details-dialog/movie-details-dialog.component';
-import { LightboxModule } from 'ngx-lightbox';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { YearPickerComponent } from './components/year-picker/year-picker.component';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,8 @@ import { LightboxModule } from 'ngx-lightbox';
     MoviesComponent,
     HeaderComponent,
     DurationPipe,
-    MovieDetailsDialogComponent
+    MovieDetailsDialogComponent,
+    YearPickerComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,11 @@ import { LightboxModule } from 'ngx-lightbox';
     MatToolbarModule,
     MatRippleModule,
     MatDialogModule,
-    LightboxModule
+    InfiniteScrollModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
+    MatNativeDateModule
+    
   ],
   providers: [MoviesService],
   bootstrap: [AppComponent]

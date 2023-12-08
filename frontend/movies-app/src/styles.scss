@@ -4,3 +4,19 @@ body {
   background-image: url('assets/1154.jpg');
   background-repeat: repeat;
 };
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #eee;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00cccc;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #009999;
+}

@@ -8,6 +8,6 @@ export interface MoviePagination {
     //Filters
     getTop10MoviesByRevenue?: boolean,
     getTop10MoviesByRevenueByYear?: boolean,
-    filterYear?: string,
+    filterYear?: number,
     data?: Movie[]
 }

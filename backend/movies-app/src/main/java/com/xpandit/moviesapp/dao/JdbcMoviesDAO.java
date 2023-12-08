@@ -73,12 +73,12 @@ public class JdbcMoviesDAO implements IMoviesDAO {
                     .append("     mi.image_type_id = it.type_id ");
 
             Map<String, Object> params = new HashMap<String, Object>();
-            params.put("offset", paginationDto.getOffset() * paginationDto.getLimit());
+            params.put("offset", paginationDto.getOffset());
             params.put("limit", paginationDto.getLimit());
 
             if (paginationDto.isGetTop10MoviesByRevenueByYear()) {
                 if (paginationDto.getFilterYear() != null) {
-                    queryBuilder.append(" WHERE EXTRACT(YEAR FROM release_date) = :filterYear  ");
+                    queryBuilder.append(" WHERE EXTRACT(YEAR FROM release_date) = :filterYear ORDER BY revenue DESC LIMIT 10  ");
                     params.put("filterYear", paginationDto.getFilterYear());
                 }
             }
@@ -89,7 +89,7 @@ public class JdbcMoviesDAO implements IMoviesDAO {
 
             queryBuilder.append(SELECT_END_WRAPPER_FOR_PAGGING);
 
-            MoviePagination moviePagination = (MoviePagination) namedParameterJdbcTemplate.query(queryBuilder.toString(), new MapSqlParameterSource(params), new MoviesPaginationExtractor());
+            MoviePagination moviePagination = (MoviePagination) namedParameterJdbcTemplate.query(queryBuilder.toString(), new MapSqlParameterSource(params), new MoviesPaginationExtractor(paginationDto.getOffset()));
             return moviePagination;
 
         } catch (EmptyResultDataAccessException e) {
@@ -102,7 +102,12 @@ public class JdbcMoviesDAO implements IMoviesDAO {
     }
 
     private final class MoviesPaginationExtractor implements ResultSetExtractor {
+        private final Integer offset;
 
+        // Constructor with additional attribute
+        public MoviesPaginationExtractor(Integer offset) {
+            this.offset = offset;
+        }
         @Override
         public Object extractData(ResultSet resultSet) throws SQLException, DataAccessException {
             List<Movie> movies = new ArrayList<>();
@@ -141,6 +146,7 @@ public class JdbcMoviesDAO implements IMoviesDAO {
             pagination.setTotalLength(totalLength);
             pagination.setData(movies);
             pagination.setLimit(10);
+            pagination.setOffset(this.offset);
 
             return pagination;
         }
