@@ -8,8 +8,7 @@
 
 ### Backend - Java Spring Boot
 1. Maven - Generate and load Maven sources
-2. Locate Spring Boot Application file - `MoviesAppApplication`
-3. Right click - Run application
+2. Run command: `mvn spring-boot:run`
 
 ### Database - PostgreSQL
 - Located on the external cloud server (onRender)
