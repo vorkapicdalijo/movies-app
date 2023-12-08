@@ -3,6 +3,7 @@ package com.xpandit.moviesapp.service;
 import com.xpandit.moviesapp.interfaces.IMoviesDAO;
 import com.xpandit.moviesapp.interfaces.IMoviesService;
 import com.xpandit.moviesapp.model.Movie;
+import com.xpandit.moviesapp.model.MoviePagination;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +29,10 @@ public class MoviesService implements IMoviesService {
     // MOVIE FUNCTIONS - START
 
     @Override
-    public List<Movie> getMovies() {
+    public MoviePagination getMovies(MoviePagination paginationDto) {
+        paginationDto.setLimit(10);
 
-
-        List<Movie> movies = this.moviesDAO.getMovies();
-
-        return movies;
+        return this.moviesDAO.getMovies(paginationDto);
     }
 
     @Override

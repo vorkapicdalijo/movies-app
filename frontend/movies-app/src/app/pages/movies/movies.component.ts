@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 import { MovieDetailsDialogComponent } from 'src/app/components/dialogs/movie-details-dialog/movie-details-dialog.component';
+import { MoviePagination } from 'src/app/models/movie-pagination.model';
 import { Movie } from 'src/app/models/movie.model';
 import { MoviesService } from 'src/app/services/movies.service';
 
@@ -9,12 +11,19 @@ import { MoviesService } from 'src/app/services/movies.service';
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.scss']
 })
-export class MoviesComponent implements OnInit {
+export class MoviesComponent implements OnInit, OnDestroy {
+
+  private subscriptions: Subscription[] = [];
+
+  public defaultPagination: MoviePagination = {
+    offset: 0,
+    limit: 10
+  };
 
   public movies: Movie[];
-  public isLoading: boolean = false;
+  public moviesPagination: MoviePagination;
 
-  imageData: any;
+  public isLoading: boolean = true;
 
   constructor(
     private moviesService: MoviesService,
@@ -22,8 +31,17 @@ export class MoviesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    let loadSub = this.moviesService.moviesLoad$
+      .subscribe((paginationDto: MoviePagination) => {
+        this.moviesPagination = paginationDto;
+        this.movies = paginationDto.data;
+
+        this.isLoading = false;
+      });
+
     this.loadMovies();
 
+    this.subscriptions.push(loadSub);
   }
 
   public openMovieDetailsDialog(movieId: number) {
@@ -41,17 +59,13 @@ export class MoviesComponent implements OnInit {
   }
 
   private loadMovies() {
-    this.isLoading = true;
-    this.moviesService.getMovies()
-    .subscribe({
-      next: (res: Movie[]) => {
-        this.movies = res;
-        this.isLoading = false;
-      },
-      error: (err) => {
-        console.log(err);
-        this.isLoading = false;
-      }
+      this.moviesService.getMoviesByPagination(this.defaultPagination);
+  }
+
+  ngOnDestroy(): void {
+    this.moviesService.ngOnDestroy();
+    this.subscriptions.forEach(sub => {
+      sub.unsubscribe();
     });
   }
 }

@@ -2,12 +2,10 @@ package com.xpandit.moviesapp.controller;
 
 import com.xpandit.moviesapp.interfaces.IMoviesService;
 import com.xpandit.moviesapp.model.Movie;
+import com.xpandit.moviesapp.model.MoviePagination;
 import com.xpandit.moviesapp.service.MoviesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,9 +22,12 @@ public class MoviesController {
 
     // MOVIE FUNCTIONS - START
 
-    @GetMapping
-    public List<Movie> getMovies() {
-        return moviesService.getMovies();
+    @PostMapping
+    public @ResponseBody MoviePagination getMovies(
+            @RequestBody(required = false) MoviePagination paginationDto
+    ) {
+
+        return moviesService.getMovies(paginationDto);
     }
 
     @GetMapping(path = "/{movieId}")
