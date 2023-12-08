@@ -46,7 +46,7 @@
 }
 
 .form-container {
-  background-color: rgba(192, 216, 216, 0.6);
+  background-color: rgba(255, 255, 255, 0.7);
   border-radius: 20px;
 }
 
@@ -78,4 +78,8 @@ i {
   .mat-calendar-arrow {
     display: none !important;
   }
+}
+
+.active {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
 }

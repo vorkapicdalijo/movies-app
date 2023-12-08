@@ -35,6 +35,9 @@ export class MoviesComponent implements OnInit, OnDestroy {
 
   public isFilterView: boolean = false;
 
+  public isRevenueFilterActive: boolean = false;
+  public isYearFilterActive: boolean = false;
+
   @Input() max: any = 2023;
 
   @Input() min: any = 1900;
@@ -75,7 +78,9 @@ export class MoviesComponent implements OnInit, OnDestroy {
       {
         data: {
           movieId: movieId
-        }
+        },
+        maxWidth: '600px',
+        
       });
 
     dialogRef.afterClosed()
@@ -113,9 +118,13 @@ export class MoviesComponent implements OnInit, OnDestroy {
   }
 
   public getMoviesByYearRevenue() {
+    this.isYearFilterActive = true;
+    this.isRevenueFilterActive = false;
+
     let filter: MovieFilter = {
       getTop10MoviesByRevenueByYear : true,
-      filterYear: moment(this.filterForm.get('yearPicker')?.value).year()
+      filterYear: moment(this.filterForm.get('yearPicker')?.value).year(),
+      getTop10MoviesByRevenue: false
     }
 
     this.moviesService.setFilters(filter);
@@ -127,8 +136,13 @@ export class MoviesComponent implements OnInit, OnDestroy {
   }
 
   public getMoviesByRevenue() {
+    this.isRevenueFilterActive = true;
+    this.isYearFilterActive = false;
+
     let filter: MovieFilter = {
       getTop10MoviesByRevenue: true,
+      filterYear: null,
+      getTop10MoviesByRevenueByYear: null
     }
 
     this.moviesService.setFilters(filter);
@@ -140,6 +154,9 @@ export class MoviesComponent implements OnInit, OnDestroy {
   public removeFilters() {
     this.movies = [];
     this.moviesService.setFilters(null);
+
+    this.isRevenueFilterActive = false;
+    this.isYearFilterActive = false;
 
     this.showYearInput = false;
     this.isFilterView = false;

@@ -1,9 +1,19 @@
 .cover-image {
-  width: 200px;
+  width: 250px;
 }
 
 @media (max-width: 576px) {
   .cover-image {
     width: 170px;
+  }
+}
+
+.basic-info-container {
+  span {
+    color: darkgray;
+    font-size: 16px;
+  }
+  h6 {
+    font-size: 18px;
   }
 }

@@ -10,6 +10,7 @@ export interface Movie {
   releaseDate: Date;
   revenue: number;
   createDate: Date;
+  abstractContent: string;
 
   titleImage: MovieImage;
   detailImages: MovieImage[];

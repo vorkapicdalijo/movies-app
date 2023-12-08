@@ -166,6 +166,7 @@ public class JdbcMoviesDAO implements IMoviesDAO {
                     .append("     m.duration, ")
                     .append("     m.release_date, ")
                     .append("     m.revenue, ")
+                    .append("     m.abstract, ")
                     .append("     mt.type_id, ")
                     .append("     mt.type_name, ")
                     .append("     mi.id as image_id, ")
@@ -205,6 +206,7 @@ public class JdbcMoviesDAO implements IMoviesDAO {
                                 movie.setReleaseDate(resultSet.getDate("release_date"));
                                 movie.setDuration(resultSet.getTime("duration"));
                                 movie.setRevenue(Float.parseFloat(resultSet.getString("revenue")));
+                                movie.setAbstractContent(resultSet.getString("abstract"));
 
                                 MovieImage titleImage = new MovieImage();
 
@@ -214,11 +216,6 @@ public class JdbcMoviesDAO implements IMoviesDAO {
                                 titleImage.setImagePath(resultSet.getString("fs_path"));
 
                                 movie.setTitleImage(titleImage);
-
-                                // TODO: Postaviti prave slike - ovo je samo za test
-                                List<MovieImage> movieImages = new ArrayList<>(Collections.nCopies(8, titleImage));
-
-                                movie.setDetailImages(movieImages);
                                 return movie;
                             });
             return selectedMovie;

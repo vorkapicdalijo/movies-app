@@ -25,7 +25,7 @@ public class Movie {
 
     private MovieImage titleImage;
 
-    private List<MovieImage> detailImages;
+    private String abstractContent;
 
     public Integer getId() {
         return id;
@@ -107,11 +107,11 @@ public class Movie {
         this.titleImage = titleImage;
     }
 
-    public List<MovieImage> getDetailImages() {
-        return detailImages;
+    public String getAbstractContent() {
+        return abstractContent;
     }
 
-    public void setDetailImages(List<MovieImage> detailImages) {
-        this.detailImages = detailImages;
+    public void setAbstractContent(String abstractContent) {
+        this.abstractContent = abstractContent;
     }
 }
