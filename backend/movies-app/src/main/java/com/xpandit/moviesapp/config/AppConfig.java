@@ -14,9 +14,9 @@ public class AppConfig {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/movies-db");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("password");
+        dataSource.setUrl("jdbc:postgresql://dpg-clpnk6c1jt2c73bddeng-a.frankfurt-postgres.render.com/moviesdb_22wv");
+        dataSource.setUsername("movies");
+        dataSource.setPassword("9fHR7220s4BMfv2GFNSEj8tD4SWt5R7f");
         return dataSource;
     }
 
