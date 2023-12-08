@@ -113,8 +113,6 @@ export class MoviesComponent implements OnInit, OnDestroy {
     });
 
     this.removeFilters();
-
-    this.loadMovies(this.defaultPagination);
   }
 
   public getMoviesByYearRevenue() {
@@ -130,6 +128,7 @@ export class MoviesComponent implements OnInit, OnDestroy {
     this.moviesService.setFilters(filter);
     this.isFilterView = true;
 
+    this.isLoading = true;
     this.loadMovies(this.defaultPagination);
 
     this.showYearInput = false;
@@ -148,10 +147,12 @@ export class MoviesComponent implements OnInit, OnDestroy {
     this.moviesService.setFilters(filter);
     this.isFilterView = true;
 
+    this.isLoading = true;
     this.loadMovies(this.defaultPagination);
   }
 
   public removeFilters() {
+    this.isLoading = true;
     this.movies = [];
     this.moviesService.setFilters(null);
 

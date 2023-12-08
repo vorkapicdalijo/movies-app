@@ -93,7 +93,7 @@
     <div class="d-flex justify-content-center p-5 mt-5" *ngIf="isLoading">
       <img src="../../../assets/spinner.svg" alt="loading spinner">
     </div>
-    <div class="d-flex justify-content-center p-5 mt-5" *ngIf="movies.length == 0">
+    <div class="d-flex justify-content-center p-5 mt-5" *ngIf="movies.length == 0 && !isLoading">
       <h1 class="text-center">No Movies found.</h1>
     </div>
   </ng-template>
